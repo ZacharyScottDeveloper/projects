@@ -26,7 +26,7 @@
 
                 // Force the output text to point directly to your main domain!
                 const shortUrl = `https://zescott.com{slug}`;
-                document.getElementById('result').innerHTML = `Short link: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+                document.getElementById('result').innerHTML = `Short link: <a href="https://zescott.com{slug}">https://zescott.com{slug}</a>`;
             } catch (err) {
                 document.getElementById('result').innerText = "Error saving link.";
             }
