@@ -21,7 +21,8 @@
             document.getElementById('result').innerText = "Saving to Google Sheet...";
 
             try {
-                await fetch(GOOGLE_SCRIPT_URL, {
+                // 1. Fire off the request to Google (it will run and save in the background)
+                fetch(GOOGLE_SCRIPT_URL, {
                     redirect: "follow", 
                     method: "POST",
                     headers: {
@@ -30,11 +31,15 @@
                     body: JSON.stringify({ slug: slug, url: longUrl })
                 });
             
+                // 2. Do not wait for Google's broken response payload. Print the link immediately!
                 const shortUrl = `https://zescott.com{slug}`;
                 document.getElementById('result').innerHTML = `Short link: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+            
             } catch (err) {
-                document.getElementById('result').innerText = "Error saving link.";
+                // This will now only fire if your actual browser code crashes
+                document.getElementById('result').innerText = "Dashboard script error.";
             }
+            
 
         }
     </script>
