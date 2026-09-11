@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Hacky Shortener</title></head>
+<body>
+    <h2>🔗 Hacky URL Shortener</h2>
+    <input type="url" id="longUrl" placeholder="https://example.com" style="width:300px;">
+    <button onclick="shorten()">Shorten</button>
+    <p id="result"></p>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOoncYij4GnjUrYgKTM9roDass0SsJzM7ENygGAZy9EYflstwwX6lF12WsrJ6V0FEP/exec";
+
+        async function shorten() {
+            const longUrl = document.getElementById('longUrl').value;
+            if (!longUrl.startsWith('http')) return alert('Invalid URL');
+
+            const slug = Math.random().toString(36).substring(2, 7);
+            document.getElementById('result').innerText = "Saving to Google Sheet...";
+
+            await fetch(GOOGLE_SCRIPT_URL, {
+                redirect: "follow",
+                method: "POST",
+                body: JSON.stringify({ slug: slug, url: longUrl })
+            });
+
+            const shortUrl = `${window.location.origin}/${slug}`;
+            document.getElementById('result').innerHTML = `Short link: <a href="${shortUrl}">${shortUrl}</a>`;
+        }
+    </script>
+</body>
+</html>
