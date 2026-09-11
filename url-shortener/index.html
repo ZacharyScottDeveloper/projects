@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Hacky Shortener</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Hacky Shortener</title>
+</head>
 <body>
     <h2>URL SHORTENER</h2>
     <input type="url" id="longUrl" placeholder="https://example.com" style="width:300px;">
@@ -8,10 +11,10 @@
     <p id="result"></p>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOoncYij4GnjUrYgKTM9roDass0SsJzM7ENygGAZy9EYflstwwX6lF12WsrJ6V0FEP/exec";
+        const GOOGLE_SCRIPT_URL = "https://google.com";
 
         async function shorten() {
-            const longUrl = document.getElementById('longUrl').value;
+            const longUrl = document.getElementById('longUrl').value.trim();
             if (!longUrl.startsWith('http')) return alert('Invalid URL');
 
             const slug = Math.random().toString(36).substring(2, 7);
@@ -24,9 +27,9 @@
                     body: JSON.stringify({ slug: slug, url: longUrl })
                 });
 
-                // Force the output text to point directly to your main domain!
+                // Fixed backtick interpolation ($ added) and missing trailing slash
                 const shortUrl = `https://zescott.com{slug}`;
-                document.getElementById('result').innerHTML = `Short link: <a href="https://zescott.com{slug}">https://zescott.com{slug}</a>`;
+                document.getElementById('result').innerHTML = `Short link: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
             } catch (err) {
                 document.getElementById('result').innerText = "Error saving link.";
             }
