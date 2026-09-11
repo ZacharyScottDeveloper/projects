@@ -30,9 +30,6 @@
             } catch (err) {
                 document.getElementById('result').innerText = "Error saving link.";
             }
-
-            const shortUrl = `${window.location.origin}/${slug}`;
-            document.getElementById('result').innerHTML = `Short link: <a href="${shortUrl}">${shortUrl}</a>`;
         }
     </script>
 </body>
