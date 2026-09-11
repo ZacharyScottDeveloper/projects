@@ -30,7 +30,6 @@
                     body: JSON.stringify({ slug: slug, url: longUrl })
                 });
             
-                
                 const shortUrl = "https://zescott.com" + slug;
                 document.getElementById('result').innerHTML = 'Short link: <a href="' + shortUrl + '" target="_blank">' + shortUrl + '</a>';
 
