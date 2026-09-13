@@ -51,7 +51,7 @@ form.addEventListener('submit', async (e) => {
             body: JSON.stringify({ slug: slug, url: longUrl })
         });
     
-        const finalShortUrl = "https://zescott.com" + slug;
+        const finalShortUrl = "https://zescott.com/" + slug;
         statusLabel.innerText = "Optimized Destination Secured:";
         shortLink.innerText = finalShortUrl;
         shortLink.href = finalShortUrl;
