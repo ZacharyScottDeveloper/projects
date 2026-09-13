@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zescott | URL Shortener</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+
+
+    <div class="cursor-dot" id="customDot"></div>
+    <div class="cursor-tail" id="customTail"></div>
+
+    <main class="shortener-container">
+        <header class="shortener-header">
+            <h1 class="main-hero">zsdev<span>.short</span></h1>
+            <p class="whatamI">Experimental Link Optimization</p>
+            <div class="role-underline"></div>
+        </header>
+
+        <section class="shortener-box">
+            <form id="shortenerForm" class="shortener-form">
+                <div class="input-group">
+                    <input type="url" id="longUrl" placeholder="Enter the url you would like shortened here" required autocomplete="off">
+                    <button type="submit" class="submit-btn">
+                        <span>Shorten Link</span>
+                    </button>
+                </div>
+            </form>
+
+            <div id="resultWrapper" class="result-wrapper hidden">
+                <div class="result-card">
+                    <p class="result-label">Optimised Destination:</p>
+                    <div class="result-display">
+                        <a href="#" id="shortenedUrl" target="_blank" class="short-link">://zescott.com</a>
+                        <button id="copyBtn" class="copy-btn" aria-label="Copy to Clipboard">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Meta Context -->
+        <footer class="footer-meta">
+            <p class="footer-text">© 2026 Zachary Scott. Open source utility block.</p>
+        </footer>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
