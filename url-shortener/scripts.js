@@ -1,6 +1,3 @@
-// ==========================================================================
-// 1. Particle Systems Tracking Pointer Logic
-// ==========================================================================
 const dot = document.getElementById('customDot');
 const tail = document.getElementById('customTail');
 let mouseX = 0, mouseY = 0, tailX = 0, tailY = 0;
@@ -51,7 +48,6 @@ form.addEventListener('submit', async (e) => {
     shortLink.href = "#";
 
     try {
-        // Fire data payload safely to Google Scripts API without blocking the UI
         fetch(GOOGLE_SCRIPT_URL, {
             redirect: "follow", 
             method: "POST",
@@ -74,7 +70,6 @@ form.addEventListener('submit', async (e) => {
 
 if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-        // Prevent actioning blank or loading sequences
         if (shortLink.href === window.location.href + "#" || !shortLink.innerText.startsWith('http')) {
             return;
         }
