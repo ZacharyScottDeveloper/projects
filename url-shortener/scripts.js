@@ -25,42 +25,44 @@ const statusLabel = document.getElementById('statusLabel');
 const shortLink = document.getElementById('shortenedUrl');
 const copyBtn = document.getElementById('copyBtn');
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const longUrl = document.getElementById('longUrl').value.trim();
+form.addEventListener('submit', async (e) => { 
+    e.preventDefault(); 
     
-    if (!longUrl.startsWith('http')) {
-        alert('Invalid URL destination framework.');
-        return;
-    }
-
-    const slug = Math.random().toString(36).substring(2, 7);
+    const longUrl = document.getElementById('longUrl').value.trim(); 
+    if (!longUrl.startsWith('http')) { 
+        alert('Invalid URL destination framework.'); 
+        return; 
+    } 
     
-    resultWrapper.classList.remove('hidden');
-    statusLabel.innerText = "Syncing with Google Core Array...";
-    shortLink.innerText = "Processing matrix alignment...";
-    shortLink.href = "#";
-
-    try {
-        fetch(GOOGLE_SCRIPT_URL, {
-            redirect: "follow", 
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-            body: JSON.stringify({ slug: slug, url: longUrl })
-        });
+    const slug = Math.random().toString(36).substring(2, 7); 
+    resultWrapper.classList.remove('hidden'); 
+    statusLabel.innerText = "Syncing with Google Core Array..."; 
+    shortLink.innerText = "Processing matrix alignment..."; 
+    shortLink.href = "#"; 
     
-        const finalShortUrl = "https://zescott.com/" + slug;
-        statusLabel.innerText = "Optimized Destination Secured:";
-        shortLink.innerText = finalShortUrl;
-        shortLink.href = finalShortUrl;
-
-    } catch (err) {
-        statusLabel.innerText = "Terminal Pipeline Breakdown.";
-        shortLink.innerText = "Dashboard framework processing error.";
+    try { 
+        // Added 'await' so the script genuinely pauses until the network request completes
+        const response = await fetch(GOOGLE_SCRIPT_URL, { 
+            method: "POST", 
+            mode: "no-cors", // Crucial for preventing Google Script CORS blocks on simple POST requests
+            headers: { 
+                "Content-Type": "text/plain;charset=utf-8" 
+            }, 
+            body: JSON.stringify({ slug: slug, url: longUrl }) 
+        }); 
+        
+        const finalShortUrl = "https://zescott.com" + slug; 
+        statusLabel.innerText = "Optimized Destination Secured:"; 
+        shortLink.innerText = finalShortUrl; 
+        shortLink.href = finalShortUrl; 
+        
+    } catch (err) { 
+        console.error(err); // Prints the exact error to your browser console for debugging
+        statusLabel.innerText = "Terminal Pipeline Breakdown."; 
+        shortLink.innerText = "Dashboard framework processing error."; 
     }
 });
+
 
 copyBtn.addEventListener('click', () => {
     if (shortLink.href === window.location.href + "#" || !shortLink.innerText.startsWith('http')) return;
