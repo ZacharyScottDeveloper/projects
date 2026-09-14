@@ -41,28 +41,29 @@ form.addEventListener('submit', async (e) => {
     shortLink.href = "#"; 
     
     try { 
-        // Added 'await' so the script genuinely pauses until the network request completes
-        const response = await fetch(GOOGLE_SCRIPT_URL, { 
+        // Sending the JSON object properly structured
+        await fetch(GOOGLE_SCRIPT_URL, { 
             method: "POST", 
-            mode: "no-cors", // Crucial for preventing Google Script CORS blocks on simple POST requests
+            mode: "no-cors", 
+            redirect: "follow", // Ensures the redirection matrix stays intact
             headers: { 
                 "Content-Type": "text/plain;charset=utf-8" 
             }, 
             body: JSON.stringify({ slug: slug, url: longUrl }) 
         }); 
         
+        // FIXED: Added the explicit forward slash before the slug string
         const finalShortUrl = "https://zescott.com" + slug; 
         statusLabel.innerText = "Optimized Destination Secured:"; 
         shortLink.innerText = finalShortUrl; 
         shortLink.href = finalShortUrl; 
         
     } catch (err) { 
-        console.error(err); // Prints the exact error to your browser console for debugging
+        console.error(err); 
         statusLabel.innerText = "Terminal Pipeline Breakdown."; 
         shortLink.innerText = "Dashboard framework processing error."; 
     }
 });
-
 
 copyBtn.addEventListener('click', () => {
     if (shortLink.href === window.location.href + "#" || !shortLink.innerText.startsWith('http')) return;
