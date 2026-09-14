@@ -18,7 +18,7 @@ function animateCursor() {
 }
 animateCursor();
 
-const GOOGLE_SCRIPT_URL = "https://google.com";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzn_ZJ4N3foQvoMEPnuGqsU91-cn-ci2v_wgb0jr54NLghTWEDhsnzaT_Fg96MOayU7/exec";
 const form = document.getElementById('shortenerForm');
 const resultWrapper = document.getElementById('resultWrapper');
 const statusLabel = document.getElementById('statusLabel');
