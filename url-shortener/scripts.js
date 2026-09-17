@@ -23,7 +23,7 @@ function animateCursor() {
 animateCursor();
 
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxaJrl6-x5kV1677X8BguJQqWDu5Zcl1VSQLfsm9QPIDrODMmcoaCgen74mIVYRRUh1/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-IaHLMJWiwXeXcozM6QVXDEhNSv2FgVAXt5R_5uZ-Cvkvce5LjlesGO5ncIjVvWlv6w/exec";
 const form = document.getElementById('shortenerForm');
 const resultWrapper = document.getElementById('resultWrapper');
 const shortLink = document.getElementById('shortenedUrl');
