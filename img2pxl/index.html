@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zesctt | Pixel Art Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="container">
+        <header class="site-header">
+            <h1 class="title">Retro Pixel Art Generator</h1>
+            <p class="subtitle">A creative tool for digital experimentation.</p>
+        </header>
+
+        <section class="workspace">
+            <div class="controls-panel">
+                <div class="control-group drag-zone" id="dropZone">
+                    <label for="imageInput" class="file-label">
+                        <span class="upload-icon">✦</span>
+                        <span class="upload-text">Choose an image or drop it here</span>
+                    </label>
+                    <input type="file" id="imageInput" accept="image/*">
+                </div>
+                
+                <div class="control-group slider-box">
+                    <div class="slider-header">
+                        <label for="pixelSlider">Pixel Resolution</label>
+                        <span id="sliderValue" class="badge">32 x 32</span>
+                    </div>
+                    <input type="range" id="pixelSlider" min="8" max="128" value="32" step="4">
+                </div>
+
+                <button id="downloadBtn" class="btn-primary">Export Artwork</button>
+            </div>
+
+            <div class="display-panel">
+                <div class="canvas-wrapper">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
