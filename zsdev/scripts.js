@@ -368,42 +368,48 @@ function makeWindowDraggable(win) {
 
 
 function enableDrag(element, container) {
-  element.addEventListener('mousedown', (startEvent) => {
-    if (startEvent.target.tagName === 'BUTTON') return;
-    startEvent.preventDefault();
+  let isDragging = false;
+  let startX, startY, offsetX, offsetY;
+  const containerRect = container.getBoundingClientRect();
+
+  element.addEventListener("mousedown", (e) => {
+    if (e.target.tagName === "BUTTON") return;
+
+    isDragging = false;
+    startX = e.clientX;
+    startY = e.clientY;
 
     const rect = element.getBoundingClientRect();
-    const offsetX = startEvent.clientX - rect.left;
-    const offsetY = startEvent.clientY - rect.top;
-
-    const containerRect = container.getBoundingClientRect();
+    offsetX = startX - rect.left;
+    offsetY = startY - rect.top;
 
     function onMouseMove(moveEvent) {
+      if (
+        !isDragging &&
+        Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY) < 5
+      ) return;
+
+      isDragging = true;
+
       let left = moveEvent.clientX - containerRect.left - offsetX;
       let top = moveEvent.clientY - containerRect.top - offsetY;
 
-      const minX = 0;
-      const minY = 0;
-      const maxX = containerRect.width - element.offsetWidth;
-      const maxY = containerRect.height - element.offsetHeight - 40;
-
-      left = Math.max(minX, Math.min(left, maxX));
-      top = Math.max(minY, Math.min(top, maxY));
+      left = Math.max(0, Math.min(left, containerRect.width - element.offsetWidth));
+      top = Math.max(0, Math.min(top, containerRect.height - element.offsetHeight - 40));
 
       element.style.left = `${left}px`;
       element.style.top = `${top}px`;
     }
 
     function onMouseUp() {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
     }
 
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
   });
 }
-
 function startTaskbarClock() {
   const clockEl = document.getElementById('clock');
   function updateTime() {
